@@ -1,72 +1,38 @@
 <template>
   <div class="container">
     <div>
-      <logo />
-      <h1 class="title">
-        twitter-search-helper
-      </h1>
-      <h2 class="subtitle">
-        My funkadelic Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <h1>{{ message }}</h1>
     </div>
+      <label for="">検索キーワード</label>
+      <input type="text" v-model="form.keyword">
+      <label for="">誰から</label>
+      @<input type="text" v-model="form.keyword">
+      <button v-on:click='open'>検索</button>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+/* eslint-disable no-console */
 export default {
-  components: {
-    Logo
+  data: function () {
+    return {
+      form: {
+        keyword: 'nyaa',
+        from: 'amanekey'
+      },
+      message: 'hello'
+    }
+  },
+  methods: {
+    open: function () {
+      console.log(1)
+      const k = `${encodeURIComponent(this.form.keyword)} from:${encodeURIComponent(this.form.from)}`
+      const url = `https://twitter.com/search?q=${k}`
+      window.open(url)
+    }
   }
 }
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
 </style>
