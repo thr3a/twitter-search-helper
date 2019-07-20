@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="u-align--center">
-      <h2>{{ message }}</h2>
+    <div class="header">
+      <h2 class="u-align-text--center">{{ message }}</h2>
+      <p>Twitterの高度な検索を、より簡単に行えるツールです。</p>
     </div>
     <fieldset>
       <label for>検索ワード</label>
@@ -24,6 +25,9 @@
         検索！
       </button>
     </fieldset>
+    <p class="u-align-text--center">
+      author: <a href="https://twitter.com/amanekey" target="_blank">@amanekey</a>
+    </p>
   </div>
 </template>
 
@@ -33,7 +37,7 @@ export default {
   data: function () {
     return {
       form: {
-        keyword: 'ねこ',
+        keyword: '',
         from: '',
         exclude_keyword: '',
         media_flag: false,
@@ -52,12 +56,15 @@ export default {
     searchURL: function () {
       const query = []
       if (this.form.strict_flag) {
-        query.push(`${encodeURIComponent('"' + this.form.keyword + '"')} OR @nopickusernameZ`)
+        query.push(`${encodeURIComponent('"' + this.form.keyword + '"')} OR @DoNotUseUNAME`)
       } else {
-        query.push(`${encodeURIComponent(this.form.keyword)} OR @nopickusernameZ`)
+        query.push(`${encodeURIComponent(this.form.keyword)} OR @DoNotUseUNAME`)
       }
       if (this.form.exclude_keyword) {
         query.push(`-${encodeURIComponent(this.form.exclude_keyword)}`)
+      }
+      if (this.form.from) {
+        query.push(`from:${this.form.from}`)
       }
       if (this.form.media_flag) {
         query.push('filter:media')
@@ -77,5 +84,10 @@ export default {
 <style>
 body {
   font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+}
+.container {
+  margin-top: 20px;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 </style>
