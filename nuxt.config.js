@@ -23,6 +23,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/vanilla-framework-version-2.1.0.min.css'
   ],
   /*
   ** Plugins to load before mounting the App
