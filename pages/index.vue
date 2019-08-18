@@ -1,35 +1,89 @@
 <template>
-  <div class="container">
-    <div class="header">
-      <h2 class="u-align-text--center">{{ message }}</h2>
-      <p>Twitterの高度な検索を、より簡単に行えるツールです。</p>
-    </div>
-    <fieldset>
-      <label for>検索ワード</label>
-      <input v-model="form.keyword" type="text" autofocus="true">
-      <input id="strictFlag" v-model="form.strict_flag" type="checkbox">
-      <label for="strictFlag">検索ワードを""で囲む</label>
-      <label for>除外ワード</label>
-      <input v-model="form.exclude_keyword" type="text">
-      <label for>特定ユーザーからのみ(@不要)</label>
-      <input v-model="form.from" type="text">
-      <input id="mediaFlag" v-model="form.media_flag" type="checkbox">
-      <label for="mediaFlag">画像/動画つきのみ</label>
-      <input id="linkedFlag" v-model="form.link_flag" type="checkbox">
-      <label for="linkedFlag">URLつきのみ</label>
-      <input id="followFlag" v-model="form.follow_flag" type="checkbox">
-      <label for="followFlag">フォロー中のユーザーのみ</label>
-      <input id="japanFlag" v-model="form.japan_flag" type="checkbox">
-      <label for="japanFlag">日本語ツイートのみ</label>
-      <input id="buzzedFlag" v-model="form.buzzed_flag" type="checkbox">
-      <label for="buzzedFlag">5いいね以上のツイートのみ</label>
-      <button class="p-button--positive" @click="open">
-        検索！
-      </button>
-    </fieldset>
-    <p class="u-align-text--center">
-      author: <a href="https://twitter.com/amanekey" target="_blank">@amanekey</a>
-    </p>
+  <div>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          {{ message }}
+        </h1>
+        <h2 class="subtitle">
+          Twitterの高度な検索を、より簡単に行えるツールです。
+        </h2>
+      </div>
+      <hr>
+      <div class="container">
+        <div class="content">
+          <div class="field">
+            <label class="label">検索ワード</label>
+            <div class="control">
+              <input v-model="form.keyword" class="input" type="text">
+              <label class="checkbox">
+                <input v-model="form.strict_flag" type="checkbox">
+                検索ワードを""で囲む
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">除外ワード</label>
+            <div class="control">
+              <input v-model="form.exclude_keyword" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">特定ユーザーからのみ(@不要)</label>
+            <div class="control">
+              <input v-model="form.from" class="input" type="text">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input v-model="form.media_flag" type="checkbox">
+              画像/動画つきのみ
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input v-model="form.link_flag" type="checkbox">
+              URLつきのみ
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input v-model="form.follow_flag" type="checkbox">
+              フォロー中のユーザーのみ
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input v-model="form.japan_flag" type="checkbox">
+              日本語ツイートのみ
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="checkbox">
+              <input v-model="form.buzzed_flag" type="checkbox">
+              5いいね以上のツイートのみ
+            </label>
+          </div>
+
+          <div class="control">
+            <button class="button is-info" @click="open">
+              検索
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="has-text-centered">
+        author:
+        <a href="https://twitter.com/amanekey" target="_blank">@amanekey</a>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -59,9 +113,15 @@ export default {
     searchURL: function () {
       const query = []
       if (this.form.strict_flag) {
-        query.push(`${encodeURIComponent('"' + this.form.keyword + '"')} OR @DoNotUseUNAME`)
+        query.push(
+          `${encodeURIComponent(
+            '"' + this.form.keyword + '"'
+          )} OR @DoNotUseUNAME`
+        )
       } else {
-        query.push(`${encodeURIComponent(this.form.keyword)} OR @DoNotUseUNAME`)
+        query.push(
+          `${encodeURIComponent(this.form.keyword)} OR @DoNotUseUNAME`
+        )
       }
       if (this.form.exclude_keyword) {
         query.push(`-${encodeURIComponent(this.form.exclude_keyword)}`)
@@ -92,11 +152,9 @@ export default {
 
 <style>
 body {
-  font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+  font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
 }
 .container {
-  margin-top: 20px;
-  margin-left: 3px;
-  margin-right: 3px;
+  max-width: 1000px;
 }
 </style>
