@@ -3,7 +3,7 @@
     <section class="section">
       <div class="container">
         <h1 class="title">
-          {{ message }}
+          {{ title }}
         </h1>
         <h2 class="subtitle">
           Twitterの高度な検索を、より簡単に行えるツールです。
@@ -16,10 +16,16 @@
             <label class="label">検索ワード</label>
             <div class="control">
               <input v-model="form.keyword" class="input" type="text">
-              <label class="checkbox">
-                <input v-model="form.strict_flag" type="checkbox">
-                検索ワードを""で囲む
-              </label>
+              <div class="buttons">
+                <a v-for="(h, index) in histories" :key="index" class="button is-light" @click="setWord(h)">{{ h }}</a>
+                <a class="button is-warning" @click="deleteAllItems">検索履歴全削除</a>
+              </div>
+              <div>
+                <label class="checkbox">
+                  <input v-model="form.strict_flag" type="checkbox">
+                  検索ワードを""で囲む
+                </label>
+              </div>
             </div>
           </div>
 
@@ -103,8 +109,12 @@ export default {
         strict_flag: false,
         link_flag: false
       },
-      message: 'Twitter検索ヘルパー'
+      title: 'Twitter検索ヘルパー',
+      histories: []
     }
+  },
+  mounted() {
+    this.histories = JSON.parse(localStorage.getItem('items')) || []
   },
   methods: {
     open: function () {
@@ -112,6 +122,7 @@ export default {
     },
     searchURL: function () {
       const query = []
+      this.addItem(this.form.keyword)
       if (this.form.strict_flag) {
         query.push(
           `${encodeURIComponent(
@@ -145,6 +156,20 @@ export default {
         query.push(`filter:follows`)
       }
       return `https://twitter.com/search?q=${query.join(' ')}`
+    },
+    addItem(word) {
+      this.histories.push(word)
+      this.setItems()
+    },
+    deleteAllItems() {
+      this.histories = []
+      this.setItems()
+    },
+    setItems() {
+      localStorage.setItem('items', JSON.stringify(this.histories))
+    },
+    setWord(word) {
+      this.form.keyword = word
     }
   }
 }
