@@ -6,15 +6,17 @@
     </div>
     <fieldset>
       <label for>検索ワード</label>
-      <input v-model="form.keyword" type="text">
+      <input v-model="form.keyword" type="text" autofocus="true">
       <input id="strictFlag" v-model="form.strict_flag" type="checkbox">
-      <label for="strictFlag">検索ワードを"で囲む</label>
+      <label for="strictFlag">検索ワードを""で囲む</label>
       <label for>除外ワード</label>
       <input v-model="form.exclude_keyword" type="text">
       <label for>特定ユーザーからのみ(@不要)</label>
       <input v-model="form.from" type="text">
       <input id="mediaFlag" v-model="form.media_flag" type="checkbox">
       <label for="mediaFlag">画像/動画つきのみ</label>
+      <input id="linkedFlag" v-model="form.link_flag" type="checkbox">
+      <label for="linkedFlag">URLつきのみ</label>
       <input id="followFlag" v-model="form.follow_flag" type="checkbox">
       <label for="followFlag">フォロー中のユーザーのみ</label>
       <input id="japanFlag" v-model="form.japan_flag" type="checkbox">
@@ -44,7 +46,8 @@ export default {
         follow_flag: false,
         japan_flag: true,
         buzzed_flag: false,
-        strict_flag: false
+        strict_flag: false,
+        link_flag: false
       },
       message: 'Twitter検索ヘルパー'
     }
@@ -74,6 +77,12 @@ export default {
       }
       if (this.form.buzzed_flag) {
         query.push('min_faves:5')
+      }
+      if (this.form.link_flag) {
+        query.push(encodeURIComponent('filter:links -filter:media'))
+      }
+      if (this.form.follow_flag) {
+        query.push(`filter:follows`)
       }
       return `https://twitter.com/search?q=${query.join(' ')}`
     }
