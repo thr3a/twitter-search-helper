@@ -163,8 +163,10 @@ export default {
       this.setItems()
     },
     deleteAllItems() {
-      this.histories = []
-      this.setItems()
+      if (window.confirm('全削除してもよろしいでしょうか？')) {
+        this.histories = []
+        this.setItems()
+      }
     },
     setItems() {
       localStorage.setItem('items', JSON.stringify(this.histories))
