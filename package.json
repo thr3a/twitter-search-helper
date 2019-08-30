@@ -14,6 +14,7 @@
     "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "bulma": "^0.7.5",
     "node-sass": "^4.12.0",
     "nuxt": "^2.0.0",
