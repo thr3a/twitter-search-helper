@@ -159,6 +159,7 @@ export default {
     },
     addItem(word) {
       this.histories.push(word)
+      this.histories = Array.from(new Set(this.histories))
       this.setItems()
     },
     deleteAllItems() {
