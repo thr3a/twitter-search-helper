@@ -17,7 +17,13 @@
             <div class="control">
               <input v-model="form.keyword" class="input" type="text">
               <div class="buttons">
-                <a v-for="(h, index) in histories" :key="index" class="button is-light" @click="setWord(h)">{{ h }}</a>
+                <a
+                  v-for="(h, index) in histories"
+                  :key="index"
+                  v-hammer:press="deleteItem"
+                  class="button is-light"
+                  @click="setWord(h)"
+                >{{ h }}</a>
                 <a class="button is-warning" @click="deleteAllItems">検索履歴全削除</a>
               </div>
               <div>
@@ -167,6 +173,9 @@ export default {
         this.histories = []
         this.setItems()
       }
+    },
+    deleteItem() {
+      alert(1)
     },
     setItems() {
       localStorage.setItem('items', JSON.stringify(this.histories))
