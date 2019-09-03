@@ -20,7 +20,7 @@
                 <a
                   v-for="(h, index) in histories"
                   :key="index"
-                  v-hammer:press="deleteItem"
+                  v-hammer:press="()=> deleteItem(index)"
                   class="button is-light"
                   @click="setWord(h)"
                 >{{ h }}</a>
@@ -169,13 +169,14 @@ export default {
       this.setItems()
     },
     deleteAllItems() {
-      if (window.confirm('全削除してもよろしいでしょうか？')) {
+      if (window.confirm('全削除しますか？(キーワード長押しで個別削除できます)')) {
         this.histories = []
         this.setItems()
       }
     },
-    deleteItem() {
-      alert(1)
+    deleteItem(index) {
+      this.histories.splice(index, 1)
+      this.setItems()
     },
     setItems() {
       localStorage.setItem('items', JSON.stringify(this.histories))
