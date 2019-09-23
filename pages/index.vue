@@ -161,7 +161,7 @@ export default {
       if (this.form.follow_flag) {
         query.push('filter:follows')
       }
-      return `https://twitter.com/search?q=${query.join(' ')}`
+      return `https://twitter.com/search?f=live&q=${query.join(' ')}`
     },
     addItem (word) {
       this.histories.push(word)
