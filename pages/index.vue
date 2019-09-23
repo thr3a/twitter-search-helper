@@ -102,7 +102,7 @@
 <script>
 /* eslint-disable no-console */
 export default {
-  data: function () {
+  data () {
     return {
       form: {
         keyword: '',
@@ -119,14 +119,14 @@ export default {
       histories: []
     }
   },
-  mounted() {
+  mounted () {
     this.histories = JSON.parse(localStorage.getItem('items')) || []
   },
   methods: {
-    open: function () {
+    open () {
       window.open(this.searchURL())
     },
-    searchURL: function () {
+    searchURL () {
       const query = []
       this.addItem(this.form.keyword)
       if (this.form.strict_flag) {
@@ -159,40 +159,31 @@ export default {
         query.push(encodeURIComponent('filter:links -filter:media'))
       }
       if (this.form.follow_flag) {
-        query.push(`filter:follows`)
+        query.push('filter:follows')
       }
       return `https://twitter.com/search?q=${query.join(' ')}`
     },
-    addItem(word) {
+    addItem (word) {
       this.histories.push(word)
       this.histories = Array.from(new Set(this.histories))
       this.setItems()
     },
-    deleteAllItems() {
+    deleteAllItems () {
       if (window.confirm('全削除しますか？(キーワード長押しで個別削除できます)')) {
         this.histories = []
         this.setItems()
       }
     },
-    deleteItem(index) {
+    deleteItem (index) {
       this.histories.splice(index, 1)
       this.setItems()
     },
-    setItems() {
+    setItems () {
       localStorage.setItem('items', JSON.stringify(this.histories))
     },
-    setWord(word) {
+    setWord (word) {
       this.form.keyword = word
     }
   }
 }
 </script>
-
-<style>
-body {
-  font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
-}
-.container {
-  max-width: 1000px;
-}
-</style>

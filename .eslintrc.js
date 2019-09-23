@@ -13,5 +13,22 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    "indent": [
+      "error",
+      2
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "vue/max-attributes-per-line": "off"
+    // "semi": [
+    //   "error",
+    //   "always"
+    // ]
   }
 }
