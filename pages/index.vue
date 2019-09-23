@@ -43,10 +43,18 @@
           </div>
 
           <div class="field">
-            <label class="label">特定ユーザーからのみ(@不要)</label>
-            <div class="control">
+            <label class="label">特定ユーザーからのみ</label>
+          </div>
+
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-static">
+                @
+              </a>
+            </p>
+            <p class="control">
               <input v-model="form.from" class="input" type="text">
-            </div>
+            </p>
           </div>
 
           <div class="field">
@@ -66,7 +74,7 @@
           <div class="field">
             <label class="checkbox">
               <input v-model="form.follow_flag" type="checkbox">
-              フォロー中のユーザーのみ
+              フォローしているユーザーのみ
             </label>
           </div>
 
@@ -80,7 +88,7 @@
           <div class="field">
             <label class="checkbox">
               <input v-model="form.buzzed_flag" type="checkbox">
-              5いいね以上のツイートのみ
+              5いいね以上のみ
             </label>
           </div>
 
