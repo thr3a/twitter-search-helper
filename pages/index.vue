@@ -35,6 +35,12 @@
             </div>
           </div>
 
+            <div class="control">
+              <a @click="insertDoubleQuotation" class="button">""挿入</a>
+            </div>
+            <div class="control">
+              <a @click="insertAnd" class="button">AND挿入</a>
+            </div>
           <div class="field">
             <label class="label">除外ワード</label>
             <div class="control">
@@ -93,7 +99,7 @@
           </div>
 
           <div class="control">
-            <button class="button is-info" @click="open">
+            <button @click="open" class="button is-info">
               検索
             </button>
           </div>
@@ -191,6 +197,12 @@ export default {
     },
     setWord (word) {
       this.form.keyword = word
+    },
+    insertDoubleQuotation () {
+      this.form.keyword += ' ""'
+    },
+    insertAnd () {
+      this.form.keyword += ' AND '
     }
   }
 }
