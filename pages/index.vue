@@ -121,7 +121,6 @@ export default {
         follow_flag: false,
         japan_flag: true,
         buzzed_flag: false,
-        strict_flag: false,
         link_flag: false
       },
       title: 'Twitter検索ヘルパー',
@@ -138,17 +137,9 @@ export default {
     searchURL () {
       const query = []
       this.addItem(this.form.keyword)
-      if (this.form.strict_flag) {
-        query.push(
-          `${encodeURIComponent(
-            '"' + this.form.keyword + '"'
-          )} OR @DoNotUseUNAME`
-        )
-      } else {
-        query.push(
-          `${encodeURIComponent(this.form.keyword)} OR @DoNotUseUNAME`
-        )
-      }
+      query.push(
+        `${encodeURIComponent(this.form.keyword)} OR @DoNotUseUNAME`
+      )
       if (this.form.exclude_keyword) {
         query.push(`-${encodeURIComponent(this.form.exclude_keyword)}`)
       }
