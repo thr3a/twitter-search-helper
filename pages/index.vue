@@ -16,31 +16,26 @@
             <label class="label">検索ワード</label>
             <div class="control">
               <input v-model="form.keyword" class="input" type="text">
-              <div class="buttons">
-                <a
-                  v-for="(h, index) in histories"
-                  :key="index"
-                  v-hammer:press="()=> deleteItem(index)"
-                  class="button is-light"
-                  @click="setWord(h)"
-                >{{ h }}</a>
-                <a class="button is-warning" @click="deleteAllItems">検索履歴全削除</a>
-              </div>
-              <div>
-                <label class="checkbox">
-                  <input v-model="form.strict_flag" type="checkbox">
-                  検索ワードを""で囲む
-                </label>
-              </div>
             </div>
           </div>
 
+          <div class="field is-grouped is-grouped-multiline">
             <div class="control">
               <a @click="insertDoubleQuotation" class="button">""挿入</a>
             </div>
             <div class="control">
               <a @click="insertAnd" class="button">AND挿入</a>
             </div>
+            <div v-for="(h, index) in histories" :key="index" class="control">
+              <a
+                v-hammer:press="()=> deleteItem(index)"
+                @click="setWord(h)"
+                class="button is-light"
+              >{{ h }}</a>
+            </div>
+            <a @click="deleteAllItems" class="button is-warning">検索履歴全削除</a>
+          </div>
+
           <div class="field">
             <label class="label">除外ワード</label>
             <div class="control">
