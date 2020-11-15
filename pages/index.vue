@@ -164,9 +164,11 @@ export default {
       return `https://twitter.com/search?f=live&q=${query.join(' ')}`
     },
     addItem (word) {
-      this.histories.push(word)
-      this.histories = Array.from(new Set(this.histories))
-      this.setItems()
+      if (word.length > 1) {
+        this.histories.push(word)
+        this.histories = Array.from(new Set(this.histories))
+        this.setItems()
+      }
     },
     deleteAllItems () {
       if (window.confirm('全削除しますか？(キーワード長押しで個別削除できます)')) {
