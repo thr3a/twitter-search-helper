@@ -2,12 +2,21 @@
   <div>
     <section class="section">
       <div class="container">
-        <h1 class="title">
-          {{ title }}
-        </h1>
-        <h2 class="subtitle">
-          Twitterの高度な検索を、より簡単に行えるツールです。
-        </h2>
+        <div class="columns is-vcentered">
+          <div class="column is-2 is-12-mobile has-text-centered">
+            <figure class="image is-64x64 is-inline-block">
+              <img src="/icon.png" alt="">
+            </figure>
+          </div>
+          <div class="column is-10">
+            <h1 class="title">
+              {{ title }}
+            </h1>
+            <h2 class="subtitle">
+              Twitterの高度な検索を、より簡単に行えるツールです。
+            </h2>
+          </div>
+        </div>
       </div>
       <hr>
       <div class="container">
