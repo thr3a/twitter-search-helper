@@ -191,6 +191,7 @@ export default {
       if (window.confirm('全削除しますか？(キーワード長押しで個別削除できます)')) {
         this.histories = []
         this.setItems()
+        this.form.keyword = ''
       }
     },
     deleteItem (index) {
