@@ -1,5 +1,10 @@
 @import "bulma/bulma.sass";
 
 .section {
-  padding: 1rem;
+  padding: {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+    bottom: 2rem;
+  }
 }
