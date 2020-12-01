@@ -59,16 +59,21 @@
           </div>
 
           <div class="field">
-            <label class="checkbox">
-              <input v-model="form.media_flag" type="checkbox">
+            <label class="radio">
+              <input v-model="form.media_filter" type="radio" value="media">
               画像/動画つきのみ
             </label>
           </div>
-
           <div class="field">
-            <label class="checkbox">
-              <input v-model="form.link_flag" type="checkbox">
+            <label class="radio">
+              <input v-model="form.media_filter" type="radio" value="url">
               URLつきのみ
+            </label>
+          </div>
+          <div class="field">
+            <label class="radio">
+              <input v-model="form.media_filter" type="radio" value="exclude_url">
+              URLつき除外
             </label>
           </div>
 
@@ -117,7 +122,7 @@ export default {
         keyword: '',
         from: '',
         exclude_keyword: '',
-        media_flag: false,
+        media_filter: '',
         follow_flag: false,
         japan_flag: true,
         buzzed_flag: false,
@@ -146,7 +151,7 @@ export default {
       if (this.form.from) {
         query.push(`from:${this.form.from}`)
       }
-      if (this.form.media_flag) {
+      if (this.form.media_filter === 'media') {
         query.push('filter:media')
       }
       if (this.form.japan_flag) {
@@ -155,8 +160,11 @@ export default {
       if (this.form.buzzed_flag) {
         query.push('min_faves:5')
       }
-      if (this.form.link_flag) {
+      if (this.form.media_filter === 'url') {
         query.push(encodeURIComponent('filter:links -filter:media'))
+      }
+      if (this.form.media_filter === 'exclude_url') {
+        query.push('-filter:links')
       }
       if (this.form.follow_flag) {
         query.push('filter:follows')
