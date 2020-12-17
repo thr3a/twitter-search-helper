@@ -68,22 +68,42 @@
           </div>
 
           <div class="field">
+            <label class="label">メディア</label>
             <label class="radio">
               <input v-model="form.media_filter" type="radio" value="media">
-              画像/動画つきのみ
+              画像/動画
             </label>
           </div>
           <div class="field">
             <label class="radio">
               <input v-model="form.media_filter" type="radio" value="url">
-              URLつきのみ
+              URL含む
             </label>
           </div>
           <div class="field">
             <label class="radio">
               <input v-model="form.media_filter" type="radio" value="exclude_url">
-              URLつき除外
+              URL除外
             </label>
+          </div>
+
+          <div class="field form-spacer">
+            <label class="label">
+              いいね数
+            </label>
+            <div class="field">
+              <label class="radio">
+                <input v-model="form.more_buzzed" type="radio" value="5">
+                5いいね以上
+              </label>
+            </div>
+            <div class="field">
+              <label class="radio">
+                <input v-model="form.more_buzzed" type="radio" value="20">
+                20いいね以上
+              </label>
+            </div>
+            </labe>
           </div>
 
           <div class="field">
@@ -97,13 +117,6 @@
             <label class="checkbox">
               <input v-model="form.japan_flag" type="checkbox">
               日本語ツイートのみ
-            </label>
-          </div>
-
-          <div class="field">
-            <label class="checkbox">
-              <input v-model="form.buzzed_flag" type="checkbox">
-              5いいね以上のみ
             </label>
           </div>
 
@@ -134,8 +147,8 @@ export default {
         media_filter: '',
         follow_flag: false,
         japan_flag: true,
-        buzzed_flag: false,
-        link_flag: false
+        link_flag: false,
+        more_buzzed: ''
       },
       title: 'Twitter検索ヘルパー',
       histories: []
@@ -166,8 +179,8 @@ export default {
       if (this.form.japan_flag) {
         query.push('lang:ja')
       }
-      if (this.form.buzzed_flag) {
-        query.push('min_faves:5')
+      if (this.form.more_buzzed) {
+        query.push(`min_faves:${this.form.more_buzzed}`)
       }
       if (this.form.media_filter === 'url') {
         query.push(encodeURIComponent('filter:links -filter:media'))
