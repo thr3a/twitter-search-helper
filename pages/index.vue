@@ -66,9 +66,14 @@
               <input v-model="form.from" class="input" type="text">
             </p>
           </div>
-
+          <label class="label">メディア</label>
           <div class="field">
-            <label class="label">メディア</label>
+            <label class="radio">
+              <input v-model="form.media_filter" type="radio" value="">
+              指定なし
+            </label>
+          </div>
+          <div class="field">
             <label class="radio">
               <input v-model="form.media_filter" type="radio" value="media">
               画像/動画
@@ -91,6 +96,12 @@
             <label class="label">
               いいね数
             </label>
+            <div class="field">
+              <label class="radio">
+                <input v-model="form.more_buzzed" type="radio" value="" checked>
+                指定なし
+              </label>
+            </div>
             <div class="field">
               <label class="radio">
                 <input v-model="form.more_buzzed" type="radio" value="5">
