@@ -1,3 +1,5 @@
-# Twitter search helper
+# Twitter検索ヘルパー
 
-https://twisearch-helper.firebaseapp.com/
+Twitterの高度な検索を、より簡単に行えるツールです。
+
+https://t.turai.work/
